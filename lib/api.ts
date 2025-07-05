@@ -1,4 +1,10 @@
-import { ApiErrorSchema, FfernFriend, FfernFriendApiSchema, PostApiResponseSchema, ShippingAddress } from "./schemas"
+import {
+  ApiErrorSchema,
+  FfernFriend,
+  FfernFriendApiSchema,
+  PostApiResponseSchema,
+  ShippingAddress,
+} from "./schemas"
 
 export const fetchFfernFriend = async (id: string): Promise<FfernFriend> => {
   const username = process.env.NEXT_PUBLIC_API_USERNAME!
