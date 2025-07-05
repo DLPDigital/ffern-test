@@ -3,6 +3,7 @@ import { ShippingAddress } from "@/lib/schemas"
 import { countryOptions } from "@/data/countryOptions"
 import { FormInput } from "../FormInput"
 import { FormSelector } from "../FormSelector"
+import { Button } from "../Button"
 
 interface AddressFormProps {
   control: Control<ShippingAddress>
@@ -86,13 +87,9 @@ export const AddressForm = ({
           placeholder="Select your country"
         />
       </div>
-      <button
-        type="submit"
-        className="w-full bg-black text-white p-3 rounded disabled:bg-gray-400 transition-colors"
-        disabled={isSubmitting}
-      >
+      <Button variant="primary" state="unlocked">
         {isSubmitting ? "Submitting..." : "Join the ledger"}
-      </button>
+      </Button>
       {submissionError && (
         <p className="text-red-500 text-sm mt-2 text-center">{submissionError}</p>
       )}

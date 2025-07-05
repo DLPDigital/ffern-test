@@ -10,6 +10,12 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-terracotta-300: oklch(0.7462 0.1218 48.07);
+  --color-terracotta-400: oklch(0.6876 0.107 49.28);
+  --color-terracotta-500: oklch(0.576 0.1237 46.95);
+  --color-ash-300: oklch(0.8928 0.0081 106.56);
+  --color-ash-500: oklch(0.6688 0.0173 110.73);
+  --color-ash-600: oklch(0.5478 0.0167 111.16);
 }
 
 @media (prefers-color-scheme: dark) {
