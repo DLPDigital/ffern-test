@@ -2,11 +2,11 @@ import { useEffect, useState } from "react"
 import { GetServerSideProps } from "next/types"
 import Head from "next/head"
 
-import { fetchFfernFriend, postShippingAddress } from "@/lib/api"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
+import { fetchFfernFriend, postShippingAddress } from "@/lib/api"
 import { ShippingAddressSchema, type ShippingAddress } from "@/lib/schemas"
 import { FfernFriendPageProps } from "@/lib/types"
 
