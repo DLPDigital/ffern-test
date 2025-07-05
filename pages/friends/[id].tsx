@@ -4,24 +4,21 @@ import { fetchFfernFriend, postShippingAddress } from "@/lib/api"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import {
-  ShippingAddressSchema,
-  type FfernFriend,
-  type ShippingAddress,
-} from "@/lib/schemas"
-
-interface FfernFriendPageProps {
-  initialData: FfernFriend
-  id: string
-}
+import { ShippingAddressSchema, type ShippingAddress } from "@/lib/schemas"
+import { Success } from "@/components/Success"
+import Head from "next/head"
+import { FfernFriendPageProps } from "@/lib/types"
+import { AddressForm } from "@/components/AddressForm"
 
 const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
   const [isSuccess, setIsSuccess] = useState(false)
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    control,
   } = useForm<ShippingAddress>({
     resolver: zodResolver(ShippingAddressSchema),
   })
@@ -56,155 +53,41 @@ const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
   if (isError) return <div>Error {error.message}</div>
 
   if (isSuccess) {
-    return (
-      <main className="p-4 md:p-8">
-        <div className="max-w-lg mx-auto text-center">
-          <h1 className="text-2xl font-semibold mb-2">Thank You, {data?.firstName}!</h1>
-          <p className="text-gray-600">Your details have been received.</p>
-        </div>
-      </main>
-    )
+    return <Success firstName={data?.firstName ?? ""} />
   }
 
   return (
-    <main className="p-4 md:p-8">
-      <div className="max-w-lg mx-auto">
-        <header className="text-center mb-8">
-          <h1 className="text-2xl font-semibold mb-2">Welcome to Ffern, {data?.firstName}</h1>
-          <p className="text-gray-600">
-            To join the Ffern ledger and receive your first fragrance, please fill in your details
-            below.
-          </p>
-        </header>
-
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <div className="grid grid-cols-2 gap-4 mb-4">
-            <div>
-              <label htmlFor="firstName" className="block mb-1">
-                First Name
-              </label>
-              <input
-                id="firstName"
-                {...register("firstName")}
-                className="w-full p-2 border rounded"
-              />
-              {errors.firstName && (
-                <p className="text-red-500 text-sm mt-1">{errors.firstName.message}</p>
-              )}
-            </div>
-            <div>
-              <label htmlFor="lastName" className="block mb-1">
-                Last Name
-              </label>
-              <input
-                id="lastName"
-                {...register("lastName")}
-                className="w-full p-2 border rounded"
-              />
-              {errors.lastName && (
-                <p className="text-red-500 text-sm mt-1">{errors.lastName.message}</p>
-              )}
-            </div>
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="address1" className="block mb-1">
-              Address
-            </label>
-            <input
-              id="address1"
-              {...register("addressLineOne")}
-              className="w-full p-2 border rounded"
-            />
-            {errors.addressLineOne && (
-              <p className="text-red-500 text-sm mt-1">{errors.addressLineOne.message}</p>
-            )}
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="addressLineTwo" className="block mb-1">
-              Apartment, suite, etc. (optional)
-            </label>
-            <input
-              id="addressLineTwo"
-              {...register("addressLineTwo")}
-              className="w-full p-2 border rounded"
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 mb-4">
-            <div>
-              <label htmlFor="city" className="block mb-1">
-                City
-              </label>
-              <input id="city" {...register("city")} className="w-full p-2 border rounded" />
-              {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city.message}</p>}
-            </div>
-            <div>
-              <label htmlFor="postcode" className="block mb-1">
-                Postcode
-              </label>
-              <input
-                id="postcode"
-                {...register("postcode")}
-                className="w-full p-2 border rounded"
-              />
-              {errors.postcode && (
-                <p className="text-red-500 text-sm mt-1">{errors.postcode.message}</p>
-              )}
-            </div>
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="stateOrCounty" className="block mb-1">
-              State / County
-            </label>
-            <input
-              id="stateOrCounty"
-              {...register("stateOrCounty")}
-              className="w-full p-2 border rounded"
-            />
-            {errors.stateOrCounty && (
-              <p className="text-red-500 text-sm mt-1">{errors.stateOrCounty.message}</p>
-            )}
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="country" className="block mb-1">
-              Country
-            </label>
-            <select
-              id="country"
-              {...register("country")}
-              className="w-full p-2 border rounded bg-white"
-              defaultValue=""
-            >
-              <option value="" disabled>
-                Select your country
-              </option>
-              <option value="GB">United Kingdom</option>
-              <option value="US">United States</option>
-              <option value="NL">Netherlands</option>
-            </select>
-            {errors.country && (
-              <p className="text-red-500 text-sm mt-1">{errors.country.message}</p>
-            )}
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-black text-white p-3 rounded disabled:bg-gray-400 transition-colors"
-            disabled={mutation.isPending}
-          >
-            {mutation.isPending ? "Submitting..." : "Join the ledger"}
-          </button>
-
-          {mutation.isError && (
-            <p className="text-red-500 text-sm mt-2 text-center">{mutation.error.message}</p>
-          )}
-        </form>
-      </div>
-    </main>
+    <>
+      <Head>
+        <title>Welcome to Ffern{data?.firstName ? `, ${data.firstName}` : ""}</title>
+        <meta
+          name="description"
+          content="Join the Ffern ledger. Fill in your details to receive your first fragrance."
+        />
+      </Head>
+      <main className="p-4 md:p-8">
+        <div className="max-w-lg mx-auto">
+          <header className="text-center mb-8">
+            <h1 className="text-2xl font-semibold mb-2">
+              Welcome to Ffern{data?.firstName ? `, ${data.firstName}` : ""}
+            </h1>
+            <p className="text-gray-600">
+              To join the Ffern ledger and receive your first fragrance, please fill in your details
+              below.
+            </p>
+          </header>
+          <AddressForm
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            register={register}
+            control={control}
+            errors={errors}
+            isSubmitting={mutation.isPending}
+            submissionError={mutation.isError ? mutation.error.message : null}
+          />
+        </div>
+      </main>
+    </>
   )
 }
 
@@ -212,7 +95,6 @@ export default FfernFriendPage
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.id as string
-
   if (!id) {
     return { notFound: true }
   }
