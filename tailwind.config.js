@@ -1,7 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
+  content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    button: {},
+    extend: {
+      colors: {
+        terracotta: {
+          300: "#EB9466",
+          400: "#D0865D",
+          500: "#B35F32",
+        },
+      },
+    },
   },
 }

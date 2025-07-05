@@ -9,6 +9,7 @@ import { Success } from "@/components/Success"
 import Head from "next/head"
 import { FfernFriendPageProps } from "@/lib/types"
 import { AddressForm } from "@/components/AddressForm"
+import { PageContainer } from "@/components/PageContainer/PageContainer"
 
 const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
   const [isSuccess, setIsSuccess] = useState(false)
@@ -65,28 +66,17 @@ const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
           content="Join the Ffern ledger. Fill in your details to receive your first fragrance."
         />
       </Head>
-      <main className="p-4 md:p-8">
-        <div className="max-w-lg mx-auto">
-          <header className="text-center mb-8">
-            <h1 className="text-2xl font-semibold mb-2">
-              Welcome to Ffern{data?.firstName ? `, ${data.firstName}` : ""}
-            </h1>
-            <p className="text-gray-600">
-              To join the Ffern ledger and receive your first fragrance, please fill in your details
-              below.
-            </p>
-          </header>
-          <AddressForm
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            register={register}
-            control={control}
-            errors={errors}
-            isSubmitting={mutation.isPending}
-            submissionError={mutation.isError ? mutation.error.message : null}
-          />
-        </div>
-      </main>
+      <PageContainer>
+        <AddressForm
+          handleSubmit={handleSubmit}
+          onSubmit={onSubmit}
+          register={register}
+          control={control}
+          errors={errors}
+          isSubmitting={mutation.isPending}
+          submissionError={mutation.isError ? mutation.error.message : null}
+        />
+      </PageContainer>
     </>
   )
 }
