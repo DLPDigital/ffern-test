@@ -1,23 +1,39 @@
 import { z } from "zod"
 
-export const FfernFriendApiSchema = z.object({
-  firstName: z.string(),
-  lastName: z.string(),
+const NameSchema = z.object({
+  firstName: z.string().min(1, { message: "First name is required" }),
+  lastName: z.string().min(1, { message: "Last name is required" }),
+})
+
+export const FfernFriendApiSchema = NameSchema.extend({
   id: z.string(),
-  createdAt: z.number(),
+  createdAt: z.number().int().positive(),
 })
 
 export type FfernFriend = z.infer<typeof FfernFriendApiSchema>
 
-export const ShippingAddressSchema = z.object({
-  firstName: z.string().min(1, { message: "First name is required" }),
-  lastName: z.string().min(1, { message: "Last name is required" }),
-  email: z.string().email({ message: "Please enter a valid email" }),
+export const ShippingAddressSchema = NameSchema.extend({
   addressLineOne: z.string().min(1),
   addressLineTwo: z.string().optional(),
   city: z.string(),
   postcode: z.string(),
-  country: z.enum(["US", "NL", "GB"]),
+  stateOrCounty: z.string().min(1, { message: "State or County is required" }),
+  country: z.enum(["US", "NL", "GB"], {
+    errorMap: () => ({ message: "Please select a country" }),
+  }),
 })
 
 export type ShippingAddress = z.infer<typeof ShippingAddressSchema>
+
+export const PostApiResponseSchema = ShippingAddressSchema.extend({
+  id: z.string(),
+  createdAt: z.number().int().positive(),
+  updatedAt: z.number().int().positive(),
+  subscribedAt: z.number().int().positive(),
+})
+export type PostApiResponse = z.infer<typeof PostApiResponseSchema>
+
+export const ApiErrorSchema = z.object({
+  error: z.string(),
+  message: z.string(),
+})
