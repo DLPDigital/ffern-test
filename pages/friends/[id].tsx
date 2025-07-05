@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react"
 import { GetServerSideProps } from "next/types"
+import Head from "next/head"
+
 import { fetchFfernFriend, postShippingAddress } from "@/lib/api"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+
 import { ShippingAddressSchema, type ShippingAddress } from "@/lib/schemas"
-import { Success } from "@/components/Success"
-import Head from "next/head"
 import { FfernFriendPageProps } from "@/lib/types"
-import { AddressForm } from "@/components/AddressForm"
+
+import { Success } from "@/components/Success"
 import { PageContainer } from "@/components/PageContainer/PageContainer"
+import { AddressForm } from "@/components/AddressForm"
 
 const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
   const [isSuccess, setIsSuccess] = useState(false)
