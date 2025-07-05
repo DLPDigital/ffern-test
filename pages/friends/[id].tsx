@@ -1,12 +1,10 @@
+import { useEffect, useState } from "react"
 import { GetServerSideProps } from "next/types"
+import { fetchFfernFriend, postShippingAddress } from "@/lib/api"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useEffect, useState } from "react"
 import {
-  ApiErrorSchema,
-  FfernFriendApiSchema,
-  PostApiResponseSchema,
   ShippingAddressSchema,
   type FfernFriend,
   type ShippingAddress,
@@ -15,54 +13,6 @@ import {
 interface FfernFriendPageProps {
   initialData: FfernFriend
   id: string
-}
-
-const fetchFfernFriend = async (id: string): Promise<FfernFriend> => {
-  const username = process.env.NEXT_PUBLIC_API_USERNAME!
-  const password = process.env.NEXT_PUBLIC_API_PASSWORD!
-  const encoded = Buffer.from(`${username}:${password}`).toString("base64")
-
-  const response = await fetch(`https://ffern-custodian.vercel.app/api/ffern-friends/${id}`, {
-    headers: {
-      Authorization: "Basic " + encoded,
-    },
-  })
-
-  if (!response.ok) {
-    throw new Error("Network response was not ok")
-  }
-  const data = await response.json()
-  console.log("data = ", data)
-  return FfernFriendApiSchema.parse(data)
-}
-
-const postShippingAddress = async ({ id, data }: { id: string; data: ShippingAddress }) => {
-  const username = process.env.NEXT_PUBLIC_API_USERNAME!
-  const password = process.env.NEXT_PUBLIC_API_PASSWORD!
-  const encoded = Buffer.from(`${username}:${password}`).toString("base64")
-
-  const response = await fetch(`https://ffern-custodian.vercel.app/api/ffern-friends/${id}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Basic " + encoded,
-    },
-    body: JSON.stringify(data),
-  })
-
-  if (!response.ok) {
-    try {
-      const errorData = await response.json()
-      const parsedError = ApiErrorSchema.safeParse(errorData)
-      if (parsedError.success) {
-        throw new Error(parsedError.data.message)
-      }
-    } catch {}
-    throw new Error("Sorry, we couldn't submit your details. Please try again.")
-  }
-
-  const responseData = await response.json()
-  return PostApiResponseSchema.parse(responseData)
 }
 
 const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
