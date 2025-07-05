@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { GetServerSideProps } from "next/types"
 import { useQuery } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -9,6 +9,11 @@ import {
   type FfernFriend,
   type ShippingAddress,
 } from "@/lib/schemas"
+
+interface FfernFriendPageProps {
+  initialData: FfernFriend;
+  id: string;
+}
 
 const fetchFfernFriend = async (id: string): Promise<FfernFriend> => {
   const username = process.env.NEXT_PUBLIC_API_USERNAME!
@@ -29,10 +34,7 @@ const fetchFfernFriend = async (id: string): Promise<FfernFriend> => {
   return FfernFriendApiSchema.parse(data)
 }
 
-const FfernFriendPage = () => {
-  const router = useRouter()
-  const { id } = router.query
-
+const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
   const {
     register,
     handleSubmit,
@@ -42,10 +44,10 @@ const FfernFriendPage = () => {
     resolver: zodResolver(ShippingAddressSchema),
   })
 
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isError, error } = useQuery({
     queryKey: ["ffernFriend", id],
-    queryFn: () => fetchFfernFriend(id as string),
-    enabled: !!id,
+    queryFn: () => fetchFfernFriend(id),
+    initialData: initialData,
   })
 
   useEffect(() => {
@@ -61,8 +63,7 @@ const FfernFriendPage = () => {
     console.log("Form submitted:", data)
   }
 
-  if (isLoading) return <div>Loading...</div>
-  if (isError) return <div>Error123: {error.message}</div>
+  if (isError) return <div>Error {error.message}</div>
 
   return (
     <main className="p-4 md:p-8">
@@ -198,3 +199,24 @@ const FfernFriendPage = () => {
 }
 
 export default FfernFriendPage
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const id = context.params?.id as string;
+
+  if (!id) {
+    return { notFound: true };
+  }
+
+  try {
+    const initialData = await fetchFfernFriend(id);
+    return {
+      props: {
+        initialData,
+        id,
+      },
+    };
+  } catch (error) {
+    console.error("Failed to fetch Ffern Friend data:", error);
+    return { notFound: true };
+  }
+};
