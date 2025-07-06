@@ -20,11 +20,12 @@ const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     reset,
     control,
   } = useForm<ShippingAddress>({
     resolver: zodResolver(ShippingAddressSchema),
+    mode: "onChange",
   })
 
   const { data, isError, error } = useQuery({
@@ -78,6 +79,7 @@ const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
           errors={errors}
           isSubmitting={mutation.isPending}
           submissionError={mutation.isError ? mutation.error.message : null}
+          isValid={isValid}
         />
       </PageContainer>
     </>
