@@ -8,7 +8,7 @@ interface IntroContainerProps {
 }
 
 export const IntroContainer = ({ children }: IntroContainerProps) => (
-  <div className="relative mx-auto w-full">
+  <div className="grid grid-cols-1 w-full max-w-[800px] mx-auto">
     <div className="relative w-full aspect-[3/1]">
       <Image
         src="/images/header-background.png"
@@ -21,9 +21,9 @@ export const IntroContainer = ({ children }: IntroContainerProps) => (
         <Bars3Icon width={23} fill="white" />
       </nav>
     </div>
-    <div className="absolute top-[60%] left-4 right-4 p-5 bg-sand-75 rounded">
+    <div className="relative mx-4 p-5 bg-sand-75 rounded -mt-[13.33%]  shadow-[2px_2px_4px_0px_#03030226]">
       {children}
-      <div className="mt-5">
+      <div className="mt-15">
         <FfernLogo width={60} height={30} fill="var(--color-ash-400)" />
       </div>
     </div>

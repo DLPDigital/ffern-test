@@ -1,7 +1,7 @@
 export const DummyFooter = () => (
   <>
-    <div id="footer" className="bg-sand-100 pt-[50px] mt-auto px-5 pb-[100px]">
-      <div className="mx-1 md:mx-[50px]">
+    <div id="footer" className="bg-sand-100 pt-[50px] px-5 pb-[100px] -mt-7">
+      <div className="mx-1 md:mx-[50px] pt-7">
         <div className="mx-auto grid w-full max-w-[900px] justify-between gap-y-2 md:grid-cols-2 lg:grid-cols-3">
           <div className="flex w-fit flex-col gap-2">
             <a className="text-sand-500 hover:text-ffern-ash-900" href="/about/how-it-works">
