@@ -25,17 +25,12 @@ export const fetchFfernFriend = async (id: string): Promise<FfernFriend> => {
 }
 
 export const postShippingAddress = async ({ id, data }: { id: string; data: ShippingAddress }) => {
-  const username = process.env.API_USERNAME!
-  const password = process.env.API_PASSWORD!
-  const encoded = Buffer.from(`${username}:${password}`).toString("base64")
-
-  const response = await fetch(`https://ffern-custodian.vercel.app/api/ffern-friends/${id}`, {
+  const response = await fetch(`/api/submit-address`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Basic " + encoded,
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify({ id, data }),
   })
 
   if (!response.ok) {

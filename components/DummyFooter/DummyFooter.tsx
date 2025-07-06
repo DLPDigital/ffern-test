@@ -4,33 +4,30 @@ export const DummyFooter = () => (
       <div className="mx-1 md:mx-[50px] pt-7">
         <div className="mx-auto grid w-full max-w-[900px] justify-between gap-y-2 md:grid-cols-2 lg:grid-cols-3">
           <div className="flex w-fit flex-col gap-2">
-            <a className="text-sand-500 hover:text-ffern-ash-900" href="/about/how-it-works">
+            <a className="text-sand-500 hover:text-ash-900" href="/about/how-it-works">
               How it works
             </a>
-            <a
-              className="text-sand-500 hover:text-ffern-ash-900"
-              href="/faq/how-do-i-return-my-bottle"
-            >
+            <a className="text-sand-500 hover:text-ash-900" href="/faq/how-do-i-return-my-bottle">
               Returns
             </a>
-            <a className="text-sand-500 hover:text-ffern-ash-900" href="/portal">
+            <a className="text-sand-500 hover:text-ash-900" href="/portal">
               Ledger Portal
             </a>
-            <a className="text-sand-500 hover:text-ffern-ash-900" href="/about/careers">
+            <a className="text-sand-500 hover:text-ash-900" href="/about/careers">
               Careers
             </a>
           </div>
           <div className="flex flex-col gap-2 lg:mx-auto">
-            <a className="text-sand-500 hover:text-ffern-ash-900" href="/faq">
+            <a className="text-sand-500 hover:text-ash-900" href="/faq">
               FAQ
             </a>
-            <a className="text-sand-500 hover:text-ffern-ash-900" href="/cinema">
+            <a className="text-sand-500 hover:text-ash-900" href="/cinema">
               Cinema
             </a>
-            <a className="text-sand-500 hover:text-ffern-ash-900" href="/podcast">
+            <a className="text-sand-500 hover:text-ash-900" href="/podcast">
               Podcast
             </a>
-            <a className="text-sand-500 hover:text-ffern-ash-900" href="/artists">
+            <a className="text-sand-500 hover:text-ash-900" href="/artists">
               Artists
             </a>
           </div>

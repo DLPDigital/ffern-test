@@ -41,7 +41,7 @@ export const IntroContainer = ({ children }: IntroContainerProps) => {
           className="object-cover object-bottom-right"
         />
         <nav
-        ref={navRef}
+          ref={navRef}
           className={`
             w-full flex items-center justify-between p-4 sm:px-16 sm:py-8 transition-all duration-300
             ${isSticky ? "fixed top-0 sm:max-w-4xl z-50 bg-sand-100 shadow-md" : "absolute top-0"}
