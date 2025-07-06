@@ -42,6 +42,8 @@ const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
     queryKey: ["ffernFriend", id],
     queryFn: () => fetchFfernFriend(id),
     initialData: initialData,
+    // Adding an infinite stale time to prevent the app trying to refetch data on the client and exposing the API keys to the browser
+    staleTime: Infinity,
   })
 
   const mutation = useMutation({
