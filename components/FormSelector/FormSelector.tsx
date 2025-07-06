@@ -1,3 +1,4 @@
+import { ChevronDownIcon } from "@heroicons/react/24/solid"
 import { useState, useEffect, useRef } from "react"
 import { Control, useController } from "react-hook-form"
 
@@ -13,10 +14,9 @@ interface FormSelectProps {
   control: Control<any>
   label: string
   options: SelectOption[]
-  placeholder: string
 }
 
-export const FormSelector = ({ name, control, label, options, placeholder }: FormSelectProps) => {
+export const FormSelector = ({ name, control, label, options }: FormSelectProps) => {
   const {
     field,
     fieldState: { error },
@@ -26,6 +26,15 @@ export const FormSelector = ({ name, control, label, options, placeholder }: For
   const containerRef = useRef<HTMLDivElement>(null)
 
   const selectedOption = options.find((opt) => opt.value === field.value)
+
+  const baseClasses =
+    "block w-full h-[50px] rounded px-[10px] pt-[16px] pb-[8px] border-2 focus:outline-none focus:ring-0 transition-colors text-left"
+
+  const normalClasses = "bg-white border-gray-300 hover:border-terracotta-200"
+
+  const errorClasses = "bg-ffern-red-50 border-ffern-red-200"
+
+  const isFloated = isOpen || !!field.value
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -39,17 +48,35 @@ export const FormSelector = ({ name, control, label, options, placeholder }: For
 
   return (
     <div className="relative" ref={containerRef}>
+      <label
+        htmlFor={name}
+        className={`
+          absolute left-[10px] transition-all duration-200 ease-in-out cursor-pointer
+          ${isFloated ? "top-[8px] -translate-y-0 text-[10px]" : "top-1/2 -translate-y-1/2 text-[15px]"}
+          ${error ? "text-ffern-red-200" : "text-ash-500"}
+        `}
+      >
+        {label}
+      </label>
+
       <button
+        id={name}
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full p-2 border rounded bg-white text-left"
+        className={`
+          ${baseClasses}
+          ${error ? errorClasses : normalClasses}
+          ${isOpen && !error ? "border-terracotta-200 bg-sand-50" : ""}
+        `}
       >
-        <div className="text-xs text-gray-500">{label}</div>
-        <div className="text-base">{selectedOption ? selectedOption.label : placeholder}</div>
+        <span className="block truncate">{selectedOption ? selectedOption.label : ""}</span>
+        <ChevronDownIcon
+          className={`absolute top-1/2 -translate-y-1/2 right-[10px] h-5 w-5 text-ash-500 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+        />
       </button>
 
       {isOpen && (
-        <ul className="absolute z-10 w-full mt-1 bg-white border rounded shadow-lg max-h-60 overflow-auto">
+        <ul className="absolute z-10 w-full mt-1 bg-white border border-terracotta-200 rounded shadow-lg max-h-60 overflow-auto">
           {options.map((option) => (
             <li
               key={option.value}
@@ -57,14 +84,13 @@ export const FormSelector = ({ name, control, label, options, placeholder }: For
                 field.onChange(option.value)
                 setIsOpen(false)
               }}
-              className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              className="px-4 py-2 hover:bg-sand-50 cursor-pointer border-b border-ash-200"
             >
               {option.label}
             </li>
           ))}
         </ul>
       )}
-      {error && <p className="text-red-500 text-sm mt-1">{error.message}</p>}
     </div>
   )
 }

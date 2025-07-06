@@ -10,15 +10,23 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-terracotta-200: oklch(0.8401 0.0701 50.17);
   --color-terracotta-300: oklch(0.7462 0.1218 48.07);
   --color-terracotta-400: oklch(0.6876 0.107 49.28);
   --color-terracotta-500: oklch(0.576 0.1237 46.95);
+  --color-ash-100: oklch(0.9818 0.0054 95.1);
+  --color-ash-200: oklch(0.9535 0.008 106.55);
   --color-ash-300: oklch(0.8928 0.0081 106.56);
   --color-ash-500: oklch(0.6688 0.0173 110.73);
   --color-ash-600: oklch(0.5478 0.0167 111.16);
   --color-sand-50: oklch(0.9877 0.0054 95.1);
   --color-sand-100: oklch(0.9307 0.0194 80.12);
   --color-sand-200: oklch(0.8792 0.026 73.16);
+  --color-ffern-green-50: oklch(0.9564 0.0217 149.71);
+  --color-ffern-green-100: oklch(0.9013 0.046 136.21);
+  --color-ffern-green-900: oklch(0.2554 0.0687 144.6);
+  --color-ffern-red-50: oklch(0.9568 0.0221 7.17);
+  --color-ffern-red-200: oklch(0.7716 0.1024 19.67);
 }
 
 @media (prefers-color-scheme: dark) {
