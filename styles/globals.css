@@ -16,6 +16,9 @@
   --color-ash-300: oklch(0.8928 0.0081 106.56);
   --color-ash-500: oklch(0.6688 0.0173 110.73);
   --color-ash-600: oklch(0.5478 0.0167 111.16);
+  --color-sand-50: oklch(0.9877 0.0054 95.1);
+  --color-sand-100: oklch(0.9307 0.0194 80.12);
+  --color-sand-200: oklch(0.8792 0.026 73.16);
 }
 
 @media (prefers-color-scheme: dark) {
