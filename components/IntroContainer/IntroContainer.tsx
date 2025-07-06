@@ -43,7 +43,7 @@ export const IntroContainer = ({ children }: IntroContainerProps) => {
         <nav
           ref={navRef}
           className={`
-            w-full flex items-center justify-between p-4 sm:px-16 sm:py-8 transition-all duration-300
+            w-full flex items-center justify-between p-4 sm:px-16 sm:py-8 transition-all duration-300 md:hidden
             ${isSticky ? "fixed top-0 sm:max-w-4xl z-50 bg-sand-100 shadow-md" : "absolute top-0"}
           `}
         >
@@ -51,7 +51,7 @@ export const IntroContainer = ({ children }: IntroContainerProps) => {
           <Bars3Icon width={23} fill={isSticky ? "var(--color-ash-400)" : "white"} />
         </nav>
       </div>
-      <div className="relative mx-4 sm:mx-16 p-5 bg-sand-75 rounded -mt-[13.33%]  shadow-[2px_2px_4px_0px_#03030226]">
+      <div className="relative mx-4 sm:mx-16 p-5 bg-sand-75 rounded -mt-[13.33%] md:-mt-[25%] shadow-[2px_2px_4px_0px_#03030226] md:max-w-[800px] justify-self-center">
         {children}
         <div className="mt-15">
           <FfernLogo width={60} height={30} fill="var(--color-ash-400)" />
