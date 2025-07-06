@@ -7,8 +7,8 @@ import {
 } from "./schemas"
 
 export const fetchFfernFriend = async (id: string): Promise<FfernFriend> => {
-  const username = process.env.NEXT_PUBLIC_API_USERNAME!
-  const password = process.env.NEXT_PUBLIC_API_PASSWORD!
+  const username = process.env.API_USERNAME!
+  const password = process.env.API_PASSWORD!
   const encoded = Buffer.from(`${username}:${password}`).toString("base64")
 
   const response = await fetch(`https://ffern-custodian.vercel.app/api/ffern-friends/${id}`, {
@@ -25,8 +25,8 @@ export const fetchFfernFriend = async (id: string): Promise<FfernFriend> => {
 }
 
 export const postShippingAddress = async ({ id, data }: { id: string; data: ShippingAddress }) => {
-  const username = process.env.NEXT_PUBLIC_API_USERNAME!
-  const password = process.env.NEXT_PUBLIC_API_PASSWORD!
+  const username = process.env.API_USERNAME!
+  const password = process.env.API_PASSWORD!
   const encoded = Buffer.from(`${username}:${password}`).toString("base64")
 
   const response = await fetch(`https://ffern-custodian.vercel.app/api/ffern-friends/${id}`, {
