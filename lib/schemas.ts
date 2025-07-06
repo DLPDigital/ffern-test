@@ -13,11 +13,11 @@ export const FfernFriendApiSchema = NameSchema.extend({
 export type FfernFriend = z.infer<typeof FfernFriendApiSchema>
 
 export const ShippingAddressSchema = NameSchema.extend({
-  addressLineOne: z.string().min(1, { message: "Address is required" }),
-  addressLineTwo: z.string().optional(),
-  city: z.string().min(1, { message: "City is required" }),
-  postcode: z.string().min(1, { message: "Postcode is required" }),
-  stateOrCounty: z.string().min(1, { message: "State or County is required" }),
+  addressLineOne: z.string().trim().min(1, { message: "Address is required" }),
+  addressLineTwo: z.string().trim().optional(),
+  city: z.string().trim().min(1, { message: "City is required" }),
+  postcode: z.string().trim().min(1, { message: "Postcode is required" }),
+  stateOrCounty: z.string().trim().min(1, { message: "State or County is required" }),
   country: z.enum(["US", "NL", "GB"], {
     errorMap: () => ({ message: "Please select a country" }),
   }),
