@@ -13,6 +13,7 @@ interface AddressFormProps {
   errors: FieldErrors<ShippingAddress>
   isSubmitting: boolean
   submissionError: string | null
+  isValid: boolean
 }
 
 export const AddressForm = ({
@@ -23,6 +24,7 @@ export const AddressForm = ({
   errors,
   isSubmitting,
   submissionError,
+  isValid,
 }: AddressFormProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -87,8 +89,8 @@ export const AddressForm = ({
           placeholder="Select your country"
         />
       </div>
-      <Button variant="primary" state="unlocked">
-        {isSubmitting ? "Submitting..." : "Join the ledger"}
+      <Button state={isValid ? "unlocked" : "locked"}>
+        {isSubmitting ? "Sending..." : "Confirm Address"}
       </Button>
       {submissionError && (
         <p className="text-red-500 text-sm mt-2 text-center">{submissionError}</p>
