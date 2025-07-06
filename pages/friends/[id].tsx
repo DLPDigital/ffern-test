@@ -34,7 +34,6 @@ const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
     },
   })
 
-
   const { data, isError, error } = useQuery({
     queryKey: ["ffernFriend", id],
     queryFn: () => fetchFfernFriend(id),
