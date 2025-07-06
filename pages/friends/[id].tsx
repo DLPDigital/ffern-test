@@ -25,7 +25,7 @@ const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
     control,
   } = useForm<ShippingAddress>({
     resolver: zodResolver(ShippingAddressSchema),
-    mode: "onChange",
+    mode: "onTouched",
   })
 
   const { data, isError, error } = useQuery({

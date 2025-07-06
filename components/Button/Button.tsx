@@ -9,17 +9,13 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
 }
 
-export const Button = ({  state, children, ...props }: ButtonProps) => {
+export const Button = ({ state, children }: ButtonProps) => {
   const Icon = state === "locked" ? PadlockIcon : ChevronRightIcon
-
+  const buttonClass =
+    "flex items-center justify-between w-full p-5 rounded-[5px] text-left h-[60px] transition-colors duration-300 ease-in-out"
   return (
     <button
-      {...props}
-      className={`
-        flex items-center justify-between w-full p-5 rounded-[5px]
-        text-left h-[60px] 
-      ${state === "locked" ? "bg-ash-300 text-ash-500" : "bg-terracotta-300 text-white"}
-      `}
+      className={`${buttonClass} ${state === "locked" ? "bg-ash-300 text-ash-500" : "bg-terracotta-300 text-white"}`}
     >
       <span>{children}</span>
       <Icon className="h-4 w-4" />
