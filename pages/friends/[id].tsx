@@ -13,6 +13,9 @@ import { FfernFriendPageProps } from "@/lib/types"
 import { Success } from "@/components/Success"
 import { PageContainer } from "@/components/PageContainer/PageContainer"
 import { AddressForm } from "@/components/AddressForm"
+import { IntroContainer } from "@/components/IntroContainer"
+import { IntroContent } from "@/components/IntroContent/IntroContent"
+import { DummyFooter } from "@/components/DummyFooter/DummyFooter"
 
 const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
   const [isSuccess, setIsSuccess] = useState(false)
@@ -28,7 +31,7 @@ const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
   } = useForm<ShippingAddress>({
     resolver: zodResolver(ShippingAddressSchema),
     mode: "onTouched",
-     defaultValues: {
+    defaultValues: {
       country: "GB",
     },
   })
@@ -80,20 +83,24 @@ const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
         />
       </Head>
       <PageContainer>
-        {isSuccess ? (
-          <Success />
-        ) : (
-          <AddressForm
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            register={register}
-            control={control}
-            errors={errors}
-            isSubmitting={mutation.isPending}
-            submissionError={mutation.isError ? mutation.error.message : null}
-            isValid={isValid}
-          />
-        )}
+        <IntroContainer>
+          <IntroContent firstName={data?.firstName ?? ""} />
+          {isSuccess ? (
+            <Success />
+          ) : (
+            <AddressForm
+              handleSubmit={handleSubmit}
+              onSubmit={onSubmit}
+              register={register}
+              control={control}
+              errors={errors}
+              isSubmitting={mutation.isPending}
+              submissionError={mutation.isError ? mutation.error.message : null}
+              isValid={isValid}
+            />
+          )}
+        </IntroContainer>
+        <DummyFooter />
       </PageContainer>
     </>
   )

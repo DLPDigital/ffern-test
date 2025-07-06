@@ -1,3 +1,4 @@
+import { FfernLogo } from "./Logo"
 import { Padlock as PadlockIcon } from "./Padlock"
 
-export { PadlockIcon }
+export { FfernLogo, PadlockIcon }

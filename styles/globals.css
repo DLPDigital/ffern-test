@@ -17,9 +17,12 @@
   --color-ash-100: oklch(0.9818 0.0054 95.1);
   --color-ash-200: oklch(0.9535 0.008 106.55);
   --color-ash-300: oklch(0.8928 0.0081 106.56);
+  --color-ash-400: oklch(0.7786 0.0194 106.84);
   --color-ash-500: oklch(0.6688 0.0173 110.73);
   --color-ash-600: oklch(0.5478 0.0167 111.16);
+  --color-ash-900: oklch(0.0959 0.0052 107.35);
   --color-sand-50: oklch(0.9877 0.0054 95.1);
+  --color-sand-75: oklch(0.9618 0.0086 84.57);
   --color-sand-100: oklch(0.9307 0.0194 80.12);
   --color-sand-200: oklch(0.8792 0.026 73.16);
   --color-ffern-green-50: oklch(0.9564 0.0217 149.71);
