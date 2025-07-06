@@ -23,10 +23,17 @@ const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
     formState: { errors, isValid },
     reset,
     control,
+    watch,
+    trigger,
   } = useForm<ShippingAddress>({
     resolver: zodResolver(ShippingAddressSchema),
     mode: "onTouched",
+     defaultValues: {
+      country: "GB",
+    },
   })
+
+  const country = watch("country")
 
   const { data, isError, error } = useQuery({
     queryKey: ["ffernFriend", id],
@@ -40,6 +47,12 @@ const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
       setIsSuccess(true)
     },
   })
+
+  useEffect(() => {
+    if (country) {
+      trigger("postcode")
+    }
+  }, [country, trigger])
 
   useEffect(() => {
     if (data) {
@@ -57,10 +70,6 @@ const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
 
   if (isError) return <div>Error {error.message}</div>
 
-  if (isSuccess) {
-    return <Success firstName={data?.firstName ?? ""} />
-  }
-
   return (
     <>
       <Head>
@@ -71,16 +80,20 @@ const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
         />
       </Head>
       <PageContainer>
-        <AddressForm
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          register={register}
-          control={control}
-          errors={errors}
-          isSubmitting={mutation.isPending}
-          submissionError={mutation.isError ? mutation.error.message : null}
-          isValid={isValid}
-        />
+        {isSuccess ? (
+          <Success />
+        ) : (
+          <AddressForm
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            register={register}
+            control={control}
+            errors={errors}
+            isSubmitting={mutation.isPending}
+            submissionError={mutation.isError ? mutation.error.message : null}
+            isValid={isValid}
+          />
+        )}
       </PageContainer>
     </>
   )

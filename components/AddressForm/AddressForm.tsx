@@ -27,8 +27,8 @@ export const AddressForm = ({
   isValid,
 }: AddressFormProps) => {
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
-      <div className="grid grid-cols-2 gap-4 mb-4">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="bg-sand-200 p-3 rounded">
+      <div className="grid grid-cols-2 gap-4 mb-[10px]">
         <FormInput
           id="firstName"
           label="First Name"
@@ -42,7 +42,7 @@ export const AddressForm = ({
           error={errors.lastName?.message}
         />
       </div>
-      <div className="mb-4">
+      <div className="mb-[10px]">
         <FormInput
           id="addressLineOne"
           label="Address Line 1"
@@ -50,7 +50,7 @@ export const AddressForm = ({
           error={errors.addressLineOne?.message}
         />
       </div>
-      <div className="mb-4">
+      <div className="mb-[10px]">
         <FormInput
           id="addressLineTwo"
           label="Address Line 2"
@@ -58,7 +58,7 @@ export const AddressForm = ({
           isOptional
         />
       </div>
-      <div className="grid grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-2 gap-4 mb-[10px]">
         <FormInput
           id="city"
           label="City"
@@ -72,7 +72,7 @@ export const AddressForm = ({
           error={errors.postcode?.message}
         />
       </div>
-      <div className="mb-4">
+      <div className="mb-[10px]">
         <FormInput
           id="stateOrCounty"
           label="State / County"
@@ -80,14 +80,8 @@ export const AddressForm = ({
           error={errors.stateOrCounty?.message}
         />
       </div>
-      <div className="mb-4">
-        <FormSelector
-          name="country"
-          control={control}
-          label="Country"
-          options={countryOptions}
-          placeholder="Select your country"
-        />
+      <div className="mb-[10px]">
+        <FormSelector name="country" control={control} label="Country" options={countryOptions} />
       </div>
       <Button state={isValid ? "unlocked" : "locked"}>
         {isSubmitting ? "Sending..." : "Confirm Address"}
