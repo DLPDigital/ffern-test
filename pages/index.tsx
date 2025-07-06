@@ -60,7 +60,9 @@ export default function Home() {
           >
             Read our docs
           </a>
-        <Link href="/friends/siobhan-1234" title="View page">View Siobhan page</Link>
+          <Link href="/friends/siobhan-1234" title="View page">
+            View Siobhan page
+          </Link>
         </div>
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
