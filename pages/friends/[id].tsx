@@ -26,13 +26,14 @@ const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
     formState: { errors, isValid },
     reset,
     control,
+    watch,
+    trigger,
   } = useForm<ShippingAddress>({
     resolver: zodResolver(ShippingAddressSchema),
     mode: "onTouched",
-    defaultValues: {
-      country: "GB",
-    },
   })
+
+  const country = watch("country")
 
   const { data, isError, error } = useQuery({
     queryKey: ["ffernFriend", id],
@@ -48,6 +49,12 @@ const FfernFriendPage = ({ initialData, id }: FfernFriendPageProps) => {
       setIsSuccess(true)
     },
   })
+
+  useEffect(() => {
+    if (country) {
+      trigger("postcode")
+    }
+  }, [country, trigger])
 
   useEffect(() => {
     if (data) {
