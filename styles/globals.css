@@ -31,6 +31,7 @@
   --color-ffern-green-900: oklch(0.2554 0.0687 144.6);
   --color-ffern-red-50: oklch(0.9568 0.0221 7.17);
   --color-ffern-red-200: oklch(0.7716 0.1024 19.67);
+  --color-nav-grey: oklch(0.8038 0.0347 73.11);
 }
 
 /* @media (prefers-color-scheme: dark) {
