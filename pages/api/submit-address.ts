@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { ShippingAddressSchema } from "@/lib/schemas"
+import { ZodError } from "zod"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
@@ -31,7 +32,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const responseData = await apiResponse.json()
     return res.status(200).json(responseData)
-  } catch {
-    return res.status(400).json({ message: "Invalid data submitted." })
+  } catch (error) {
+    if (error instanceof ZodError) {
+      return res.status(400).json({ message: "Invalid data provided.", errors: error.errors });
+    }
+    return res.status(500).json({ message: "An unexpected error occurred." });
   }
 }
