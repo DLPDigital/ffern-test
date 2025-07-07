@@ -2,8 +2,8 @@ import { Control, FieldErrors, UseFormHandleSubmit, UseFormRegister } from "reac
 import { ShippingAddress } from "@/lib/schemas"
 import { countryOptions } from "@/data/countryOptions"
 import { FormInput } from "../FormInput"
-import { FormSelector } from "../FormSelector"
 import { Button } from "../Button"
+import { RadixDropdown } from "../RadixDropdown"
 
 interface AddressFormProps {
   control: Control<ShippingAddress>
@@ -87,7 +87,7 @@ export const AddressForm = ({
             />
           </div>
           <div className="mb-[10px]">
-            <FormSelector
+            <RadixDropdown
               name="country"
               control={control}
               label="Country"
