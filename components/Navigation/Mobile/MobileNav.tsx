@@ -1,8 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { Bars3Icon } from "@heroicons/react/24/solid"
-import { FfernLogo } from "@/components/SVG"
+import { BurgerIcon, FfernLogo } from "@/components/SVG"
 
 export const MobileNav = () => {
   const [isSticky, setIsSticky] = useState(false)
@@ -35,12 +34,12 @@ export const MobileNav = () => {
     <nav
       ref={navRef}
       className={`
-        w-full flex items-center justify-between p-4 sm:px-16 sm:py-8 transition-all duration-300 md:hidden
+        w-full flex items-center justify-between p-5 pt-4 sm:px-16 sm:py-8 transition-all duration-300 md:hidden
         ${isSticky ? "fixed top-0 sm:max-w-4xl z-50 bg-sand-100 shadow-md" : "absolute top-0"}
       `}
     >
       <FfernLogo width={60} height={30} fill={isSticky ? "var(--color-ash-400)" : "white"} />
-      <Bars3Icon width={23} fill={isSticky ? "var(--color-ash-400)" : "white"} />
+      <BurgerIcon width={23} height={23} fill={isSticky ? "var(--color-ash-400)" : "white"} />
     </nav>
   )
 }

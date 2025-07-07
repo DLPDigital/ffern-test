@@ -18,7 +18,7 @@ export const covikSans = localFont({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className={covikSans.className}>
+    <div className={`${covikSans.className} text-[15px]`}>
       <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />
       </QueryClientProvider>

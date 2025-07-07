@@ -45,7 +45,7 @@ export const RadixDropdown = ({ name, control, label, options }: RadixDropdownPr
           htmlFor={name}
           className={`
             absolute left-[10px] transition-all duration-200 ease-in-out z-10 pointer-events-none
-            ${isFloated ? "top-[8px] -translate-y-0 text-[10px]" : "top-1/2 -translate-y-1/2 text-[15px]"}
+            ${isFloated ? "top-[8px] -translate-y-0 text-[10px]" : "top-1/2 -translate-y-1/2 "}
             ${error ? "text-ffern-red-200" : "text-ash-500"}
           `}
         >
@@ -56,7 +56,7 @@ export const RadixDropdown = ({ name, control, label, options }: RadixDropdownPr
           id={name}
           className={`${baseClasses} ${error ? errorClasses : normalClasses}`}
         >
-          <span className="block truncate">
+          <span className="block truncate -ml-[1px] ">
             <Select.Value placeholder=" " />
           </span>
           <Select.Icon className="absolute top-1/2 -translate-y-1/2 right-[10px]">

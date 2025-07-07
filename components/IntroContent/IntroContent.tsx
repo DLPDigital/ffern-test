@@ -8,7 +8,7 @@ interface IntroContentProps {
 export const IntroContent = ({ firstName }: IntroContentProps) => (
   <div className="flex flex-col items-center">
     <Image src="/images/video-preview.png" height={150} width={150} alt="Welcome Video Preview" />
-    <div className="leading-normal space-y-3 mt-[10px] mb-8 text-ash-900">
+    <div className="leading-normal space-y-3 my-5 transition-all duration-200 ease-in-out text-ash-900">
       <p>Dear {firstName},</p>
       <p>{content.intro}</p>
       <p>{content.howItWorks.sentence}</p>
@@ -18,7 +18,7 @@ export const IntroContent = ({ firstName }: IntroContentProps) => (
           return (
             <li
               key={key}
-              className="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-[11px] before:h-0.75 before:w-0.75 before:bg-ash-900"
+              className="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-[11px] before:h-0.5 before:w-0.5 before:bg-ash-900 mb-4"
             >
               {point}
             </li>
