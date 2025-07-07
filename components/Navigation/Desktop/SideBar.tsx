@@ -8,13 +8,11 @@ export const SideBar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
-    // Find the scrollable container on the page
     const scrollableContainer = document.querySelector('[data-scrollable="true"]')
     if (!scrollableContainer) return
 
     const handleScroll = (event: Event) => {
       const target = event.currentTarget as HTMLElement
-      // Check if the user has scrolled down
       if (target.scrollTop > 10) {
         setIsScrolled(true)
       } else {
@@ -30,7 +28,7 @@ export const SideBar = () => {
   }, [])
 
   return (
-    <div className="hidden md:block w-64 flex-shrink-0 h-screen transition-all duration-300 w-[340px] lg:w-[370px] xl:w-[380px] bg-sand-50">
+    <div className="hidden md:block w-64 flex-shrink-0 h-screen transition-all duration-300 w-[340px] lg:w-[370px] xl:w-[380px] bg-sand-50 border-r border-sand-200">
       <div className="flex flex-col p-8 lg:p-12">
         <FfernLogo width={80} height={40} fill="var(--color-ash-900)" className="mb-[43px]" />
         <TableDummy />
